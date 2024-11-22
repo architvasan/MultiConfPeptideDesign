@@ -1,0 +1,8 @@
+##### getting contacts to input into chai1:
+over metastates 0-3
+python src/analyze/contact_pairs.py
+ -p inputs/NMNAT-2/conformations/meta1.pdb 
+ -sA "protein and resid 119-192 and not name H*"
+ -sB "protein and not name H*"
+ -c 3.5
+ -o common/contact_pairs/meta1_pairs.csv

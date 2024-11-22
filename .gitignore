@@ -1,0 +1,6 @@
+inputs/Peptide_Data/Homo_sapiens_peptides.fasta
+inputs/NMNAT-2/conformations/meta0.pdb
+inputs/NMNAT-2/conformations/meta1.pdb
+inputs/NMNAT-2/conformations/meta2.pdb
+inputs/NMNAT-2/conformations/meta3.pdb
+multiconf_design

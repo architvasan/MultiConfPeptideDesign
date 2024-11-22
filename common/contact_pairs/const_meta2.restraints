@@ -1,0 +1,13 @@
+chainA,res_idxA,chainB,res_idxB,connection_type,confidence,min_distance_angstrom,max_distance_angstrom,comment,restraint_id
+A,E132,A,R108,contact,1.0,0.0,5.5,loop_prot,restraint_1
+A,T133,A,R108,contact,1.0,0.0,5.5,loop_prot,restraint_2
+A,T123,A,N116,contact,1.0,0.0,5.5,loop_prot,restraint_3
+A,F173,A,I113,contact,1.0,0.0,5.5,loop_prot,restraint_4
+A,I126,A,V109,contact,1.0,0.0,5.5,loop_prot,restraint_5
+A,K151,A,Q75,contact,1.0,0.0,5.5,loop_prot,restraint_6
+A,I152,A,Q71,contact,1.0,0.0,5.5,loop_prot,restraint_7
+A,R167,A,L105,contact,1.0,0.0,5.5,loop_prot,restraint_8
+A,F173,A,L193,contact,1.0,0.0,5.5,loop_prot,restraint_9
+A,F173,A,H8,contact,1.0,0.0,5.5,loop_prot,restraint_10
+A,M186,A,I113,contact,1.0,0.0,5.5,loop_prot,restraint_11
+A,Y188,A,L114,contact,1.0,0.0,5.5,loop_prot,restraint_12
