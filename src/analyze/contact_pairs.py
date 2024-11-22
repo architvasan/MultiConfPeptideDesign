@@ -83,11 +83,13 @@ def calc_cont_pairs(inputpdb,
                 B_rnm_sing = three_to_one(B_rnm_trip)
                 A_atom_name = atom_A.name
                 B_atom_name = atom_B.name
-                #print(f"{A_rnm_trip}:{A_rnm_sing},\
-                #       {B_rnm_trip}:{B_rnm_sing}")
-                print(f"{A_rnm_sing}{A_rid_it}:{A_atom_name}\
-                      {B_rnm_sing}{B_rid_it}{B_atom_name}")
                 if abs(A_rid_it - B_rid_it)>4:
+                    A_sel_it = u.select_atoms(f'resid {A_rid_it} and name CA')
+                    B_sel_it = u.select_atoms(f'resid {B_rid_it} and name CA')
+                    dist = distance_array(A_sel_it.positions, B_sel_it.positions)[0][0] 
+                    print(dist)
+                    del(A_sel_it)
+                    del(B_sel_it)
                     pair_it = (f'{A_rnm_sing}{A_rid_it}',
                                f'{B_rnm_sing}{B_rid_it}')
                     if pair_it not in contact_pairs:
@@ -99,21 +101,20 @@ def calc_cont_pairs(inputpdb,
                         dict_pairs["chainB"].append(chainB)
                         dict_pairs["res_idxB"].append(f'{B_rnm_sing}{B_rid_it-1}')
                         dict_pairs["connection_type"].append('contact')
-                        dict_pairs["confidence"].append(1)
-                        dict_pairs["min_distance_angstrom"].append(0)
-                        dict_pairs["max_distance_angstrom"].append(cutoff)
-                        dict_pairs["comment"].append(f'{A_rnm_sing}{A_rid_it}\
-                                                     :{B_rnm_sing}{B_rid_it}\
-                                                     win {cutoff}')
+                        dict_pairs["confidence"].append(1.0)
+                        dict_pairs["min_distance_angstrom"].append(0.0)
+                        dict_pairs["max_distance_angstrom"].append(dist)
+                        dict_pairs["comment"].append(f'{A_rnm_sing}{A_rid_it}:{B_rnm_sing}{B_rid_it}'\
+                                                     f':{cutoff}')
                         dict_pairs["restraint_id"].append(f'restraint{rest_id}')
                     else:
                         contact_pairs.append((f'{A_rnm_sing}{A_rid_it}',
                                            f'{B_rnm_sing}{B_rid_it}'))
     del chain_B
-    contact_pairs_df = pairs_to_frequency_df(contact_pairs)
+    freq_pairs_df = pairs_to_frequency_df(contact_pairs)
     df_pairs_rests = pd.DataFrame(dict_pairs)
 
-    return contact_pairs_df, df_pairs_rests
+    return freq_pairs_df, df_pairs_rests
 
 if __name__ == "__main__":
 
@@ -138,22 +139,43 @@ if __name__ == "__main__":
                         type=str,
                         help='phrase for seelction B (in mdanalysis language)')
 
+    parser.add_argument('-CA',
+                        '--chainA',
+                        type=str,
+                        help='chain for seelction A')
+
+    parser.add_argument('-CB',
+                        '--chainB',
+                        type=str,
+                        help='chain for seelction B')
+
     parser.add_argument('-c',
                      '--cutoff',
                      type=float,
-                     help='cutoff for judging a contact or not (3.5 for heavy atoms)')
+                     required=False,
+                     default=5.5,
+                     help='cutoff (default: 5.5)')
 
-    parser.add_argument('-o',
-                        '--outfile',
+    parser.add_argument('-of',
+                        '--outfreq',
                         type=str,
-                        help='where to save pairs?')
+                        help='pair freq data outfile')
+
+    parser.add_argument('-or',
+                        '--outrest',
+                        type=str,
+                        help='restraints format outfile?')
 
     args = parser.parse_args()
 
-    int_pairs_df = calc_cont_pairs(args.inputpdb, args.selA, args.selB, cutoff=3.5)
-    print(int_pairs_df)
-    int_pairs_df.to_csv(args.outfile)
-
+    freq_pairs_df,df_pairs_rests = calc_cont_pairs(args.inputpdb,
+                                                   args.selA, 
+                                                   args.selB, 
+                                                   chainA=args.chainA,
+                                                   chainB=args.chainB,
+                                                   cutoff=args.cutoff)
+    freq_pairs_df.to_csv(args.outfreq)
+    df_pairs_rests.to_csv(args.outrest)
     # Write the pairs to the file
     # with open(args.outfile, "w") as file:
         # for pair in int_pairs:

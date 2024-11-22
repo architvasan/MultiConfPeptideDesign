@@ -1,0 +1,12 @@
+,chainA,res_idxA,chainB,res_idxB,connection_type,confidence,min_distance_angstrom,max_distance_angstrom,comment,restraint_id
+0,A,P119,A,S114,contact,1.0,0.0,7.530557031462128,P120:S115:8.0,restraint1
+1,A,S120,A,N115,contact,1.0,0.0,6.553244595500464,S121:N116:8.0,restraint2
+2,A,M185,A,V116,contact,1.0,0.0,5.967596106429747,M186:V117:8.0,restraint3
+3,A,Y187,A,V116,contact,1.0,0.0,7.39943947610954,Y188:V117:8.0,restraint4
+4,A,E189,A,T4,contact,1.0,0.0,7.510108354603622,E190:T5:8.0,restraint5
+5,A,I190,A,H7,contact,1.0,0.0,7.648132408003563,I191:H8:8.0,restraint6
+6,A,I190,A,T109,contact,1.0,0.0,7.04849753271068,I191:T110:8.0,restraint7
+7,A,E191,A,T4,contact,1.0,0.0,6.849822328013744,E192:T5:8.0,restraint8
+8,A,E191,A,K5,contact,1.0,0.0,6.616608378487077,E192:K6:8.0,restraint9
+9,A,E191,A,T6,contact,1.0,0.0,5.113513853587602,E192:T7:8.0,restraint10
+10,A,E191,A,H7,contact,1.0,0.0,5.845067805710304,E192:H8:8.0,restraint11
