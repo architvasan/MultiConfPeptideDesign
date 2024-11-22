@@ -2,10 +2,10 @@
 module load conda
 conda activate chai1
 cd /eagle/datascience/avasan/Simulations/MultiConfPeptideDesign
-cutoff=10
+cutoff=12
 for i in {0..3}
 do
-    python src/analyze/contact_pairs.py \
+    python mcbind/analyze/contact_pairs.py \
         -p inputs/NMNAT-2/conformations/meta${i}.pdb \
         -sA "protein and resid 119-192 and name CA" \
         -sB "protein and name CA" \
